@@ -1,0 +1,28 @@
+version: "3"
+services:
+    client:
+        container_name: hexa-client
+        build:
+            context: ./client
+            dockerfile: Dockerfile
+        image: hexainstitute/clientimage
+        ports:
+            - "3000:3000"
+        volumes:
+            - ./client:/usr/src/app
+    api:
+        container_name: hexa-api
+        build:
+            context: ./server
+            dockerfile: Dockerfile
+        image: hexainstitute/serverimage
+        ports:
+            - "3003:3003"
+        volumes:
+            - ./server:/usr/src/app
+        depends_on:
+            - mongodb
+    mongo:
+        image: mongo
+        ports:
+            - "27017:27017"
