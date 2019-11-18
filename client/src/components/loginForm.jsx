@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Joi from 'joi-browser';
 
 class LoginForm extends Component {
   state = {
@@ -6,15 +7,31 @@ class LoginForm extends Component {
       username: '',
       password: ''
     },
-    errors: {
+    errors: {}
+  }
 
-    }
+  schema = {
+    username: Joi.string().required().label('Username'),
+    password: Joi.string().required().label('Password')
+  }
+
+  validate = () => {
+    const options = { abortEarly: false }; // prevent early stop
+    const { error } = Joi.validate(this.state.account, this.schema, options);
+    if (!error) return null;
+
+    const errors = {};
+    for (let item of error.details) errors[item.path[0]] = item.message;
+    return errors;
   }
 
   handleSubmit = (e) => {
     e.preventDefault();
 
-    this.validate();
+    const errors = this.validate();
+    
+    this.setState({ errors: errors || {} }); //Never be null
+    if (errors) return;
   };
 
   handleChange = (e) => {
@@ -25,12 +42,13 @@ class LoginForm extends Component {
 
   render() {
     const { username, password } = this.state.account;
+    const { errors } = this.state;
 
     return (
       <div onSubmit={this.handleSubmit}>
         <h1>Login</h1>
         <form>
-          <div className="form-group">
+          <div style={{margin: 0}} className="form-group">
             <label htmlFor="username">Username</label>
             <input 
               id="username"
@@ -38,10 +56,14 @@ class LoginForm extends Component {
               onChange={this.handleChange}
               name="username" 
               type="text" 
-              className="form-control" 
+              className="form-control"
+              error={errors.username}
             />
           </div>
-          <div className="form-group">
+          {errors.username && <div className="alert alert-danger">
+            {errors.username}
+          </div>}
+          <div style={{margin: 0}} className="form-group">
             <label htmlFor="password">Password</label>
             <input 
               id="password" 
@@ -50,9 +72,13 @@ class LoginForm extends Component {
               name="password"
               type="text" 
               className="form-control" 
+              error={errors.password}
             />
           </div>
-          <button className="btn btn-primary">Login</button>
+          {errors.password && <div className="alert alert-danger">
+            {errors.password}
+          </div>}
+          <button style={{marginTop: 10}} className="btn btn-primary">Login</button>
         </form>
       </div>
     );

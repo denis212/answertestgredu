@@ -6,7 +6,7 @@ const Sidenav = () => {
     <div className="sidebar-sticky">
       <ul className="nav flex-column">
         <Link className="navbar-brand" to="#">
-          Hexa Inst.
+          Hexa Institute
         </Link>
         <NavLink className="nav-item nav-link" to="/students">
           Students
