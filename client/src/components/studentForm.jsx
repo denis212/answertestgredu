@@ -39,7 +39,7 @@ class StudentForm extends Form {
     // this.setState({ data: this.mapToViewModel(student) })
   }
 
-  mapToViewModel(student) {
+  mapToViewModel(student) { // map logic
     return {
       _id: student._id,
       number: student.number,
@@ -57,9 +57,7 @@ class StudentForm extends Form {
   };
 
   doSubmit = () => {
-    /* saveStudent(this.state.data); */
-
-    this.props.history.push("/students");
+    /* save logic */
   }
 
   render() {

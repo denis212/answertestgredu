@@ -18,32 +18,32 @@ class Students extends Component {
         program: 'Art',
       },
       {
-        number: 3421412356,
+        number: 3456,
         name: 'John',
         program: 'Letters',
       },
       {
-        number: 451412367,
+        number: 4567,
         name: 'Xena',
         program: 'Language',
       },
       {
-        number: 121312334,
+        number: 5678,
         name: 'Nona',
         program: 'Technology',
       },
       {
-        number: 231231245,
+        number: 6789,
         name: 'Bekir',
         program: 'Art',
       },
       {
-        number: 34512356,
-        name: 'Akrab',
+        number: 7890,
+        name: 'Ali',
         program: 'Letters',
       },
       {
-        number: 41321567,
+        number: 8901,
         name: 'Aleyna',
         program: 'Language',
       }
