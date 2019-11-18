@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Pagination from '../commons/pagination';
 import StudentsTable from './studentsTable';
+import { NavLink } from 'react-router-dom';
 import { paginate } from '../utils/paginate';
 
 class Students extends Component {
@@ -65,6 +66,9 @@ class Students extends Component {
 
     return (
       <React.Fragment>
+        <NavLink to="/new" className="btn btn-primary" style={{ marginBottom: 20 }}>
+          New Student
+        </NavLink>
         <p>There are {count} students registered.</p>
         <StudentsTable students={students}/>
         <Pagination itemsCount={count} pageSize={pageSize} currentPage={currentPage} onPageChange={this.handlePageChange}/>
